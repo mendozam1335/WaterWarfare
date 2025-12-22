@@ -1,6 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0b70shfpue6n"]
 
 [ext_resource type="PackedScene" uid="uid://dexngr855cg6u" path="res://Scenes/Player.tscn" id="1_tumq0"]
+[ext_resource type="PackedScene" uid="uid://dqpcu1kk7vo05" path="res://Scenes/house.tscn" id="2_k5f4k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tumq0"]
 sky_top_color = Color(0.27284974, 0.33051214, 0.40734783, 1)
@@ -16,9 +17,6 @@ sky = SubResource("Sky_k5f4k")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51e2h"]
-albedo_color = Color(0, 0.22352941, 1, 1)
-
 [node name="Level" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -33,48 +31,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5982666, 0, -0.43688965)
 use_collision = true
 size = Vector3(90, 0.5, 90)
 
-[node name="House" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3342743, 3.75, -34.671734)
-use_collision = true
-size = Vector3(14, 7, 10)
-material = SubResource("StandardMaterial3D_51e2h")
-
-[node name="Door" type="CSGBox3D" parent="House"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6723397, -2.3999999, 5.0085907)
-operation = 2
-use_collision = true
-size = Vector3(1, 2.2, 0.1)
-
-[node name="Inside" type="CSGBox3D" parent="House"]
-transform = Transform3D(0.847, 0, 0, 0, 0.911, 0, 0, 0, 0.9, 0, -0.2241211, 0)
-operation = 2
-use_collision = true
-size = Vector3(14, 7, 10)
-material = SubResource("StandardMaterial3D_51e2h")
-
-[node name="House2" type="CSGBox3D" parent="."]
-transform = Transform3D(0.72189313, 0, 0.69200456, 0, 1, 0, -0.69200456, 0, 0.72189313, -21.393684, 3.75, -24.532019)
-use_collision = true
-size = Vector3(14, 7, 10)
-material = SubResource("StandardMaterial3D_51e2h")
-
-[node name="House4" type="CSGBox3D" parent="."]
-transform = Transform3D(0.04829192, 0, 0.99883324, 0, 1, 0, -0.99883324, 0, 0.04829192, -28.005, 3.75, -4.795)
-use_collision = true
-size = Vector3(14, 7, 10)
-material = SubResource("StandardMaterial3D_51e2h")
-
-[node name="House5" type="CSGBox3D" parent="."]
-transform = Transform3D(0.04829192, 0, 0.99883324, 0, 1, 0, -0.99883324, 0, 0.04829192, 27.278961, 3.75, -3.836567)
-use_collision = true
-size = Vector3(14, 7, 10)
-material = SubResource("StandardMaterial3D_51e2h")
-
-[node name="House3" type="CSGBox3D" parent="."]
-transform = Transform3D(0.6079996, 0, -0.7939374, 0, 1, 0, 0.7939374, 0, 0.6079996, 21.838955, 3.75, -25.983627)
-use_collision = true
-size = Vector3(14, 7, 10)
-material = SubResource("StandardMaterial3D_51e2h")
-
 [node name="Player" parent="." instance=ExtResource("1_tumq0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2499999, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2500002, 0)
+
+[node name="House" parent="." instance=ExtResource("2_k5f4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32507277, -25)

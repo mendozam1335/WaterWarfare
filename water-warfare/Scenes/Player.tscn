@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ewko8h4qimj1" path="res://Scripts/player.gd" id="1_rpqav"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jqoc8"]
+radius = 0.41308594
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bg71n"]
 
