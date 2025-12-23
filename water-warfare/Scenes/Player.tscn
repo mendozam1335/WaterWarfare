@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dexngr855cg6u"]
+[gd_scene load_steps=5 format=3 uid="uid://dexngr855cg6u"]
 
 [ext_resource type="Script" uid="uid://ewko8h4qimj1" path="res://Scripts/player.gd" id="1_rpqav"]
+[ext_resource type="Script" uid="uid://bjc7g3iobeyft" path="res://Scripts/smooth_camera.gd" id="2_kyqiw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jqoc8"]
 radius = 0.41308594
@@ -8,6 +9,7 @@ radius = 0.41308594
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bg71n"]
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_rpqav")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -16,5 +18,21 @@ shape = SubResource("CapsuleShape3D_jqoc8")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_bg71n")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 2, 4)
+[node name="SmoothCamera" type="SpringArm3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+spring_length = 4.0
+script = ExtResource("2_kyqiw")
+target = NodePath("../HorizontalPivot/VerticalPivot")
+
+[node name="Camera3D" type="Camera3D" parent="SmoothCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 3)
+
+[node name="HorizontalPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="VerticalPivot" type="Node3D" parent="HorizontalPivot"]
+
+[node name="FacingDirectionTemp" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.58723116, -0.48510742)
+radius = 0.15478516
+height = 0.97021484

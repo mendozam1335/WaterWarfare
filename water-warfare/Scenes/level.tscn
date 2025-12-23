@@ -36,3 +36,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2500002, 0)
 
 [node name="House" parent="." instance=ExtResource("2_k5f4k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32507277, -25)
+
+[node name="House2" parent="." instance=ExtResource("2_k5f4k")]
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, -22.809364, 0.32507277, -11.942967)
+
+[node name="House4" parent="." instance=ExtResource("2_k5f4k")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -29.233034, 0.32507277, 12.250022)
+
+[node name="House5" parent="." instance=ExtResource("2_k5f4k")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 29.1904, 0.32507277, 12.250022)
+
+[node name="House3" parent="." instance=ExtResource("2_k5f4k")]
+transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, 22.761492, 0.32507277, -11.942967)
