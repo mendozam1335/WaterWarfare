@@ -13,6 +13,7 @@ var _look := Vector2.ZERO
 
 @onready var horizontal_pivot: Node3D = $HorizontalPivot
 @onready var vertical_pivot: Node3D = $HorizontalPivot/VerticalPivot
+@onready var smooth_camera: Smooth_Camera = $SmoothCamera
 
 
 func _ready() -> void:
@@ -46,9 +47,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 	#todo: toggle camera movement for shoulder placment left or right
-	if event.is_action_pressed("camera_switch"):
-		pass
-	
+	if event.is_action_pressed("aim"):
+		print("currently aiming")
+		smooth_camera.enter_aim_mode()
+		
+	if event.is_action_released("aim"):
+		print("no longer aiming")
+		smooth_camera.enter_third_person_mode()
+		
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			_look += -event.relative * mouse_sensitivity
