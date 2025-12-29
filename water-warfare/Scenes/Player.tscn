@@ -1,12 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dexngr855cg6u"]
+[gd_scene load_steps=7 format=3 uid="uid://dexngr855cg6u"]
 
 [ext_resource type="Script" uid="uid://ewko8h4qimj1" path="res://Scripts/player.gd" id="1_rpqav"]
-[ext_resource type="Script" uid="uid://bjc7g3iobeyft" path="res://Scripts/smooth_camera.gd" id="2_kyqiw"]
+[ext_resource type="Script" uid="uid://hmkiyosksq6q" path="res://Scripts/Camera.gd" id="3_dewec"]
 [ext_resource type="PackedScene" uid="uid://umwwhmmiodrp" path="res://Scenes/rig.tscn" id="3_gntrk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jqoc8"]
-radius = 0.22607422
+radius = 0.3
 height = 1.5703125
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dewec"]
+margin = 0.01
+radius = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gntrk"]
+margin = 0.01
+radius = 0.1
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -16,23 +24,32 @@ script = ExtResource("1_rpqav")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78515625, 0)
 shape = SubResource("CapsuleShape3D_jqoc8")
 
-[node name="SmoothCamera" type="SpringArm3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-script = ExtResource("2_kyqiw")
-target = NodePath("../HorizontalPivot/VerticalPivot")
-
-[node name="MainCamera" type="Camera3D" parent="SmoothCamera"]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-current = true
-
-[node name="AimCamera" type="Camera3D" parent="SmoothCamera"]
-fov = 32.9
-
-[node name="HorizontalPivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.285, 0)
-
-[node name="VerticalPivot" type="Node3D" parent="HorizontalPivot"]
-
 [node name="RigPivot" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Rig" parent="RigPivot" instance=ExtResource("3_gntrk")]
+
+[node name="CameraRig" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3254558, 0)
+script = ExtResource("3_dewec")
+aim_distance = 0.8
+aim_shoulder_offset = 0.35
+default_shoulder_offset = 0.5
+player = NodePath("..")
+
+[node name="EdgeSpringArm" type="SpringArm3D" parent="CameraRig"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_dewec")
+spring_length = 10.0
+
+[node name="RearSpringArm" type="SpringArm3D" parent="CameraRig/EdgeSpringArm"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_gntrk")
+spring_length = 1.5
+
+[node name="Camera" type="Camera3D" parent="CameraRig/EdgeSpringArm/RearSpringArm"]
+
+[node name="HorizontalPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3254558, 0)
+
+[node name="VerticalPivot" type="Node3D" parent="HorizontalPivot"]
